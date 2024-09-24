@@ -38,9 +38,9 @@ public static class LoggerConfig
 
             if (serilogOptions.EnableSeq)
             {
-                var apiKey = serilogOptions.SeqApiKey;
-                var seqUrl = serilogOptions.SeqURL;
-                configuration.WriteTo.Seq(seqUrl, apiKey: apiKey);
+                //var apiKey = serilogOptions.SeqApiKey;
+                //var seqUrl = serilogOptions.SeqURL;
+                //configuration.WriteTo.Seq(seqUrl, apiKey: apiKey);
             }
 
             configuration.Enrich.FromLogContext();

@@ -181,7 +181,7 @@ public class xPlugUniController(IStartSession sessionStarter, ICacheUtil cacheUt
                 BioData = new BioDataVM(),
                 Contact = new ContactVM(),
                 CourseReg = new CourseRegVM(),
-                DocuUploads = new DocUploadsVM(),
+                DocUploads = new DocUploadsVM(),
                 Library = new LibraryVM(),
                 Medicals = new MedicalsVM(),
                 NokInfo = new NokInfoVM(),

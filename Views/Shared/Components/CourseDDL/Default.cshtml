@@ -1,4 +1,4 @@
-﻿@model CourseVCM
+﻿@* @model CourseVCM
 <select class="form-select form-select-lg form-set" asp-for="CourseId" style="width:100%" data-parsley-required-message="Kindly Select Course of Study" required>
     @if (Model.ItemList == null || !Model.ItemList.Any())
     {
@@ -20,4 +20,4 @@
 
         }
     }
-</select>
+</select> *@

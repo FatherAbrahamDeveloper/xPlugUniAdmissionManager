@@ -5,10 +5,10 @@ public enum RegStage
     BioData = 1,
     Contact,
     NokInfo,
-    Olevels,
-    Course,
     Medicals,
+    Olevels,
     Library,
-    DocumentUploads, 
+    CourseReg,
+    DocUploads, 
     Submission
 }

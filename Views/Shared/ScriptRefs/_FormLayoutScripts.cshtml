@@ -1,0 +1,81 @@
+﻿<div class="modal fade" id="dvModal" tabindex="-1" aria-hidden="true">
+    <div id="modalContent"></div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery-3.7.1.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/apexcharts/dist/apexcharts.min.js"></script>
+
+<script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+<script src="~/lib/datatables/dataTables.bootstrap.min.js"></script>
+
+<script src="~/lib/sweet-alert/sweetalert.min.js"></script>
+<script src="~/js/toolkit-js/kits/parsley.min.js"></script>
+<script src="~/js/toolkit-js/kits/xtoolkit.js"></script>
+<script src="~/js/toolkit-js/jscripts/Jquery.BlockUI.min.js"></script>
+<script src="~/js/toolkit-js/jscripts/jquery-confirm.min.js"></script>
+<script src="~/js/toolkit-js/kits/aes.js"></script>
+<script src="~/js/toolkit-js/tree/jstree.min.js"></script>
+<script src="~/js/toolkit-js/date/moment.min.js"></script>
+<script src="~/js/toolkit-js/date/daterangepicker.min.js"></script>
+
+<script src="~/js/pages/core/page-common.js" asp-append-version="true"></script>
+<script src="~/js/toolkit-js/kits/xp-common.js" asp-append-version="true"></script>
+
+<script src="~/lib/wow/wow.min.js"></script>
+<script src="~/lib/easing/easing.min.js"></script>
+<script src="~/lib/waypoints/waypoints.min.js"></script>
+<script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
+<!-- Template Javascript -->
+<script src="~/js/main.js"></script>
+
+<script>
+    $(function () {
+        $("#basic-table").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+        $('#custom-table').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+        $('#default-table').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "responsive": true,
+        });
+    });
+</script>
+<script>
+    $(function () {
+        $.ajaxSetup({ cache: false });
+        $body = $("body");
+
+        $(document).on("click", "a[data-modal]", function (e) {
+            $(e.target).closest('.btn-group').children('.dropdown-toggle').dropdown('toggle');
+            $('#modalContent').load(this.href, function () {
+                $('#dvModal').modal('show', {
+                    backdrop: 'static',
+                    keyboard: false,
+                });
+            });
+            return false;
+        });
+        $(".modal").on("hidden.bs.modal", function () {
+            $(this).removeData();
+        });
+    });
+</script>
+
+<script src="~/js/pages/core/page-core.js" asp-append-version="true"></script>
+<script src="~/js/pages/core/page-def.js" asp-append-version="true"></script>

@@ -1,4 +1,5 @@
-﻿@model YearVCM
+﻿@* @model YearVCM
+
 <select class="form-select form-select-lg form-set" id="@Model.Id" name="@Model.Id" style="width:100%" data-parsley-required-message="Kindly Select Year" required>
     @if (Model.ItemList == null || !Model.ItemList.Any())
     {
@@ -20,4 +21,4 @@
 
         }
     }
-</select>
+</select> *@
