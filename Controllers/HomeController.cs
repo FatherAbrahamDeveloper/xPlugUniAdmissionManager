@@ -17,6 +17,11 @@ namespace xPlugUniAdmissionManager.Controllers
         {
             return View();
         }
+        public IActionResult Instruction()
+        {
+            return View();
+        }
+
 
         public IActionResult Privacy()
         {

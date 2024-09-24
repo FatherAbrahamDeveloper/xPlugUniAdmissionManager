@@ -1,7 +1,7 @@
 ﻿
 namespace xPlugUniAdmissionManager.ViewComponents;
 
-public class GenderDDL 
-{ 
+public class LocalAreaDDL
+{
 
 }

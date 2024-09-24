@@ -4,3 +4,5 @@ global using XP.Kit.CommonUItils;
 global using XP.Kit.CommonUItils.Enums;
 global using xPlugUniAdmissionManager.Models.RegVMs;
 using xPlugUniAdmissionManager.Models.Enums;
+using xPlugUniAdmissionManager.Assets.VComponents;
+using xPlugUniAdmissionManager.Assets.AppKits;

@@ -1,4 +1,4 @@
-﻿namespace XPAcademy.Models.Enums;
+﻿namespace XplugUniAdmissionManager.Models.Enums;
 
 public enum CourseOfStudy
 {

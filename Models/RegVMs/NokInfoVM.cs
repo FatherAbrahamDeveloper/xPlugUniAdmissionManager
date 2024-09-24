@@ -5,14 +5,14 @@ namespace xPlugUniAdmissionManager.Models.RegVMs;
 public class NokInfoVM
 {
     public string PhotoPath { get; set; } = Empty;
-    public string Surname { get; set; } = Empty;
-    public string FirstName { get; set; } = Empty;
-    public string OtherNames { get; set; } = Empty;
-    public DateTime DateOfBirth { get; set; } 
-    public Gender Gender { get; set; }
-    public MaritalStatus MaritalStatus { get; set; }
-    public string Email { get; set; } = Empty;
-    public string Mobile { get; set; } = Empty;
+    public string NokSurname { get; set; } = Empty;
+    public string NokFirstName { get; set; } = Empty;
+    public string NokOtherNames { get; set; } = Empty;
+    public DateTime NokDateOfBirth { get; set; } 
+    public Gender NokGender { get; set; }
+    public MaritalStatus NokMaritalStatus { get; set; }
+    public string NokEmail { get; set; } = Empty;
+    public string NokMobile { get; set; } = Empty;
     public NextOfKinType RelationshipType { get; set; }
 
     //Next of Kin Residential Address

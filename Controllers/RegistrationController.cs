@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace xPlugUniAdmissionManager.Controllers
+namespace xPlugUniAdmissionManager.Controllers;
+
+public class RegistrationController : Controller
 {
-    public class RegistrationController : Controller
+    public IActionResult Index()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }

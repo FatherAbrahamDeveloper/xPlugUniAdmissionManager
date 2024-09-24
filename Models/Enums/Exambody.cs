@@ -1,6 +1,6 @@
 ﻿namespace xPlugUniAdmissionManager.Models.Enums
 {
-    public enum ExaminationBody
+    public enum ExamBody
     {
         WAEC, 
         NECO, 
