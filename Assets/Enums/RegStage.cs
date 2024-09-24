@@ -9,5 +9,6 @@ public enum RegStage
     Course,
     Medicals,
     Library,
-    DocumentUploads
+    DocumentUploads, 
+    Submission
 }

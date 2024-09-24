@@ -1,0 +1,23 @@
+﻿@model FacultyVCM
+<select class="form-select form-select-lg form-set" asp-for="FacultyId" style="width:100%" data-parsley-required-message="Kindly Select Faculty" required>
+    @if (Model.ItemList == null || !Model.ItemList.Any())
+    {
+        <option value="">-- Empty List --</option>
+    }
+    else
+    {
+        <option value="">-- Please Select --</option>
+        @foreach (var item in Model.ItemList)
+        {
+            if (Model.FacultyId == item.Id)
+            {
+                <option value="@item.Id" selected="selected">@item.Name</option>
+            }
+            else
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+
+        }
+    }
+</select>

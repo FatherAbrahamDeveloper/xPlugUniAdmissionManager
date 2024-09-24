@@ -1,6 +1,8 @@
-﻿namespace xPlugUniAdmissionManager.Assets.AppKits
+﻿namespace xPlugUniAdmissionManager.Assets.AppKits;
+
+public class OptionsExt
 {
-    public class OptionsExt
-    {
-    }
+   
 }
+
+

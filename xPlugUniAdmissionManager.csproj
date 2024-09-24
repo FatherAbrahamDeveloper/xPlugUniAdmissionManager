@@ -18,7 +18,10 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Datas\" />
+    <Folder Include="Views\Registration\Modules\" />
+    <Folder Include="Views\Registration\ReadViews\" />
+    <Folder Include="Views\Shared\Layouts\" />
+    <Folder Include="Views\Shared\ScriptRefs\" />
     <Folder Include="wwwroot\AppDocs\TempUploads\" />
   </ItemGroup>
 
