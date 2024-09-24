@@ -1,6 +1,6 @@
-﻿namespace xPlugUniAdmissionManager.Models.RegVMs
+﻿namespace xPlugUniAdmissionManager.Models.RegVMs;
+
+public class CourseRegVM
 {
-    public class CourseRegVM
-    {
-    }
+    public string PhotoPath { get; set; } = Empty;
 }
