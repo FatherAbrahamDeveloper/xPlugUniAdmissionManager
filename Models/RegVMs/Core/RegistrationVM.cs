@@ -16,6 +16,6 @@ public class RegistrationVM
     public MedicalsVM Medicals { get; set; } = default!;
     public NokInfoVM NokInfo { get; set; } = default!;
     public OlevelsVM Olevels { get; set; } = default!;
-    public DocUploadsVM DocuUploads { get; set; } = default!;
+    public DocUploadsVM DocUploads { get; set; } = default!;
 
 }

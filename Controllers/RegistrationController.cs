@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata;
 using System.Text;
 using xPlugUniAdmissionManager.Assets.AppKits;
 using xPlugUniAdmissionManager.Assets.AppSession;
@@ -442,7 +443,7 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
                 return Json(new { IsSuccessful = false, Error = valResult4.Errors.ToErrorListString(), IsAuthenticated = true });
 
             if (reg.Medicals == null)
-                return Json(new { IsSuccessful = false, Error = "Invalid Program Information", IsAuthenticated = true });
+                return Json(new { IsSuccessful = false, Error = "Invalid Medical Information", IsAuthenticated = true });
 
             var valResult5 = await _medicalsValidator.ValidateAsync(reg.Medicals);
             if (!valResult5.IsValid)
@@ -519,14 +520,14 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
                 return Json(new { IsSuccessful = false, Error = valResult4.Errors.ToErrorListString(), IsAuthenticated = true });
 
             if (reg.Medicals == null)
-                return Json(new { IsSuccessful = false, Error = "Invalid Program Information", IsAuthenticated = true });
+                return Json(new { IsSuccessful = false, Error = "Invalid Medical Information", IsAuthenticated = true });
 
             var valResult5 = await _medicalsValidator.ValidateAsync(reg.Medicals);
             if (!valResult5.IsValid)
                 return Json(new { IsSuccessful = false, Error = valResult5.Errors.ToErrorListString(), IsAuthenticated = true });
             
             if (reg.Olevels == null)
-                return Json(new { IsSuccessful = false, Error = "Invalid Program Information", IsAuthenticated = true });
+                return Json(new { IsSuccessful = false, Error = "Invalid O'Levels Information", IsAuthenticated = true });
 
             var valResult6 = await _olevelsValidator.ValidateAsync(reg.Olevels);
             if (!valResult6.IsValid)
@@ -557,9 +558,200 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
         }
     }
 
+    //Course Registration
+    [HttpPost("process-course-registration")]
+    public async Task<JsonResult> ProcessCourseReg(CourseRegVM model)
+    {
+        try
+        {
+
+            if (model == null)
+                return Json(new { IsSuccessful = false, Error = "Session Expired", IsAuthenticated = true });
+
+            var valResult = await _courseRegValidator.ValidateAsync(model);
+            if (!valResult.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            var resp = GetRegFromStore();
+            if (resp.Failed)
+                return Json(new { IsSuccessful = false, Error = resp.Errors[0], IsAuthenticated = true });
+
+            var reg = resp.Value;
+
+            if (reg == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Application Session!", IsAuthenticated = true });
+
+            if (IsNullOrEmpty(reg.PhotoPath) || reg.PhotoPath.Length < 6)
+                return Json(new { IsSuccessful = false, Error = "Kindly attach your photograph", IsAuthenticated = true });
+
+            if (reg.BioData == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Bio data Information", IsAuthenticated = true });
+
+            var valResult2 = await _bioValidator.ValidateAsync(reg.BioData);
+            if (!valResult2.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult2.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            if (reg.Contact == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Contact Information", IsAuthenticated = true });
+
+            var valResult3 = await _contactValidator.ValidateAsync(reg.Contact);
+            if (!valResult3.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult3.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            if (reg.NokInfo == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Next of Kin Information", IsAuthenticated = true });
+
+            var valResult4 = await _nokInfoValidator.ValidateAsync(reg.NokInfo);
+            if (!valResult4.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult4.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            if (reg.Medicals == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Medical Information", IsAuthenticated = true });
+
+            var valResult5 = await _medicalsValidator.ValidateAsync(reg.Medicals);
+            if (!valResult5.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult5.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            if (reg.Olevels == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid O'Levels Information", IsAuthenticated = true });
+
+            var valResult6 = await _olevelsValidator.ValidateAsync(reg.Olevels);
+            if (!valResult6.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult5.Errors.ToErrorListString(), IsAuthenticated = true });
+            
+            if (reg.Library == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid O'Levels Information", IsAuthenticated = true });
+
+            var valResult7 = await _libraryValidator.ValidateAsync(reg.Library);
+            if (!valResult7.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult5.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            reg.CourseReg ??= new CourseRegVM();
+            reg.CourseReg.PhotoPath = reg.PhotoPath;
+            reg.CourseReg.MatricNumber = model.MatricNumber;
+            reg.CourseReg.Faculty = model.Faculty;
+            reg.CourseReg.Department = model.Department;
+            reg.CourseReg.CourseOfStudy = model.CourseOfStudy;
+
+
+            reg.DocUploads ??= new DocUploadsVM();
+            reg.DocUploads.PhotoPath = reg.PhotoPath;
+
+            //Next Stage
+            //reg.OtherInfo ??= new OtherInfoVM();
+            //reg.OtherInfo.PhotoPath = reg.PhotoPath;
+
+
+            return Json(new { IsAuthenticated = true, IsSuccessful = true, IsReload = false, Error = "" });
+        }
+        catch (Exception ex)
+        {
+            UtilTools.LogE(ex.StackTrace, ex.Source, ex.Message);
+            return Json(new { IsAuthenticated = true, IsSuccessful = false, IsReload = false, Error = "Process Error Occurred! Please try again later" });
+        }
+    }
+
+    //Document Uploads
+    [HttpPost("process-document-uploads")]
+    public async Task<JsonResult> ProcessDocUploads(DocUploadsVM model)
+    {
+        try
+        {
+
+            if (model == null)
+                return Json(new { IsSuccessful = false, Error = "Session Expired", IsAuthenticated = true });
+
+            var valResult = await _docUploadsValidator.ValidateAsync(model);
+            if (!valResult.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            var resp = GetRegFromStore();
+            if (resp.Failed)
+                return Json(new { IsSuccessful = false, Error = resp.Errors[0], IsAuthenticated = true });
+
+            var reg = resp.Value;
+
+            if (reg == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Application Session!", IsAuthenticated = true });
+
+            if (IsNullOrEmpty(reg.PhotoPath) || reg.PhotoPath.Length < 6)
+                return Json(new { IsSuccessful = false, Error = "Kindly attach your photograph", IsAuthenticated = true });
+
+            if (reg.BioData == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Bio data Information", IsAuthenticated = true });
+
+            var valResult2 = await _bioValidator.ValidateAsync(reg.BioData);
+            if (!valResult2.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult2.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            if (reg.Contact == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Contact Information", IsAuthenticated = true });
+
+            var valResult3 = await _contactValidator.ValidateAsync(reg.Contact);
+            if (!valResult3.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult3.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            if (reg.NokInfo == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Next of Kin Information", IsAuthenticated = true });
+
+            var valResult4 = await _nokInfoValidator.ValidateAsync(reg.NokInfo);
+            if (!valResult4.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult4.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            if (reg.Medicals == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Medical Information", IsAuthenticated = true });
+
+            var valResult5 = await _medicalsValidator.ValidateAsync(reg.Medicals);
+            if (!valResult5.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult5.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            if (reg.Olevels == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid O'Levels Information", IsAuthenticated = true });
+
+            var valResult6 = await _olevelsValidator.ValidateAsync(reg.Olevels);
+            if (!valResult6.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult5.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            if (reg.Library == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Library Information", IsAuthenticated = true });
+
+            var valResult7 = await _libraryValidator.ValidateAsync(reg.Library);
+            if (!valResult7.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult5.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            if (reg.CourseReg == null)
+                return Json(new { IsSuccessful = false, Error = "Invalid Course Registration Information", IsAuthenticated = true });
+
+            var valResult8 = await _courseRegValidator.ValidateAsync(reg.CourseReg);
+            if (!valResult7.IsValid)
+                return Json(new { IsSuccessful = false, Error = valResult5.Errors.ToErrorListString(), IsAuthenticated = true });
+
+            reg.DocUploads ??= new DocUploadsVM();
+            reg.DocUploads.PhotoPath = reg.PhotoPath;
+            reg.DocUploads.BirthCertificate = model.BirthCertificate;
+            reg.DocUploads.Testimonial = model.Testimonial;
+            reg.DocUploads.AdmissionLetter = model.AdmissionLetter;
+            reg.DocUploads.Olevel = model.Olevel;
+            reg.DocUploads.Olevel2 = model.Olevel2;
+            reg.DocUploads.UTME = model.UTME;
+            reg.DocUploads.NIN = model.NIN;
+            reg.DocUploads.ReferenceLetter = model.ReferenceLetter;
+            reg.RegStage = RegStage.Submission;
+
+            //Next Stage
+            //reg.DocUploads ??= new DocUploadsVM();
+            //reg.DocUploads.PhotoPath = reg.PhotoPath;
 
 
 
+
+            return Json(new { IsAuthenticated = true, IsSuccessful = true, IsReload = false, Error = "" });
+        }
+        catch (Exception ex)
+        {
+            UtilTools.LogE(ex.StackTrace, ex.Source, ex.Message);
+            return Json(new { IsAuthenticated = true, IsSuccessful = false, IsReload = false, Error = "Process Error Occurred! Please try again later" });
+        }
+    }
 
 }
-//reg.RegStage = RegStage.Submission; do this for Document Uploads
