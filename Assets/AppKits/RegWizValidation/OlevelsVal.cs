@@ -1,6 +1,7 @@
-﻿namespace xPlugUniAdmissionManager.Assets.AppKits.RegWizValidation
+﻿using FluentValidation;
+
+namespace xPlugUniAdmissionManager.Assets.AppKits.RegWizValidation;
+
+public class OlevelsVal : AbstractValidator<OlevelsVM>
 {
-    public class OlevelsVal
-    {
-    }
 }

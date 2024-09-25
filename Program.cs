@@ -51,6 +51,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
+app.UseAuthentication();
+app.UseRewriter();
+app.UseSession();
+app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Strict });
 
 app.MapControllerRoute(
     name: "default",

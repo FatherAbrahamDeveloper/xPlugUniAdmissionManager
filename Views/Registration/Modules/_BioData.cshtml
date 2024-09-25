@@ -1,5 +1,94 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model BioDataVM
 @{
+    Layout = null;
+    var picSource = string.IsNullOrEmpty(Model.PhotoPath) ? "~/img/passport.png" : $"~/AppDocs/TempUploads/{Model.PhotoPath}";
 }
+
+<div class="row">
+    <div class="col-lg-3 regbg-student">
+        <div class="card regbg">
+            <div class="card-body">
+                <div class="text-center">
+                    <img src="@Url.Content(picSource)" id="photoView" alt="Passport Photo" class="img-fluid" width="260" />
+                </div>
+                <div>
+                    <form id="frmPicUpload" method="post" action="@Url.Action("upload-photo", "register")" enctype="multipart/form-data">
+                        <input class="form-control" type="file" id="photoUpload" name="photoUpload" accept="image/*" placeholder="Upload Photo">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <div class="card">
+            <form id="frmBiodata" method="post" data-parsley-validate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <h4><span class="stepIndicator">Bio Data</span></h4>
+                            <div class="pagicon">
+                                <span><a href="#" class="pag pagin">1</a></span>
+                                <span><a href="#" class="pag">2</a></span>
+                                <span><a href="#" class="pag">3</a></span>
+                                <span><a href="#" class="pag">4</a></span>
+                                <span><a href="#" class="pag">5</a></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 step">
+                            <div id="dvError"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="Surname" class="label-f">Surname</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="Surname" data-parsley-required="true" data-parsley-required-message="Surname is required">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="FirstName" class="label-f">First Name</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="FirstName" data-parsley-required="true" data-parsley-required-message="First Name is required">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="OtherNames" class="label-f">Other Names</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="OtherNames" data-parsley-required="true" data-parsley-required-message="Other Names are required">
+                                </div>
+                                <div class="col-sm-4 pt-1">
+                                    <label for="DateOfBirth" class="label-f">Date Of Birth</label>
+                                    <input type="date" class="form-control form-select-lg form-set" asp-for="DateOfBirth" data-parsley-min-message="Kindly select Marital Status" data-parsley-required="true" data-parsley-required-message="Date of Birth is required">
+                                </div>
+                                <div class="col-sm-4 pt-1">
+                                    <label for="Gender" class="label-f">Gender</label>
+                                    <select asp-for="Gender" class="form-select form-select-lg form-set" data-parsley-min="1" data-parsley-min-message="Kindly select Gender" data-parsley-required-message="Kindly select Gender">
+                                        <option value="0" selected> -- Please Select -- </option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                    <span asp-validation-for="Gender"></span>
+                                </div>
+                                <div class="col-sm-4 pt-1">
+                                    <label for="MaritalStatus" class="label-f">Marital Status</label>
+                                    <select asp-for="MaritalStatus" class="form-select form-select-lg form-set" data-parsley-min="1" data-parsley-min-message="Kindly select Marital Status" data-parsley-required-message="Kindly select Marital Status">
+                                        <option value="0" selected> -- Please Select -- </option>
+                                        <option value="1">Single</option>
+                                        <option value="2">Married</option>
+                                        <option value="3">Separated</option>
+                                        <option value="4">Divorced</option>
+                                        <option value="5">Widow</option>
+                                        <option value="6">Widower</option>
+                                    </select>
+                                    <span asp-validation-for="MaritalStatus"></span>
+                                </div>
+                              @*   <div class="col-sm-6 pt-1">
+                                    <label for="MobileNo" class="label-f">Mobile Number</label>
+                                    <input type="tel" class="form-control form-select-lg form-set" asp-for="MobileNo" maxlength="11" data-parsley-required="true" data-parsley-required-message="Mobile Number is required">
+                                </div>
+                                <div class="col-sm-6 pt-1">
+                                    <label for="Email" class="label-f">Email</label>
+                                    <input type="email" class="form-control form-select-lg form-set" asp-for="Email" data-parsley-required="true" data-parsley-required-message="Email is required">
+                                </div> *@
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,8 @@
-﻿namespace xPlugUniAdmissionManager.Assets.AppKits.RegWizValidation
+﻿using FluentValidation;
+
+namespace xPlugUniAdmissionManager.Assets.AppKits.RegWizValidation
 {
-    public class NokInfoVal
+    public class NokInfoVal : AbstractValidator<NokInfoVM>
     {
     }
 }

@@ -25,8 +25,10 @@
 
     <p>By proceeding to the application form, you confirm that you meet the eligibility criteria and have the required documents ready.</p>
 
-    <button asp-action="ApplicationForm" asp-controller="Admissions" class="btn btn-primary btn-lg">
+    <a href="@Url.Action("RegWizard", "Registration", new { stage = 1 })" class="btn btn-primary btn-lg">
         Proceed to Form
-    </button>
-</div>
+    </a>
+
+   @*     <a href="@Url.Action("wizard", "register", new {stage = Model.stage})" class="btn btn-reg3" title="Start Registration">Start Registration</a>
+ *@</div>
 

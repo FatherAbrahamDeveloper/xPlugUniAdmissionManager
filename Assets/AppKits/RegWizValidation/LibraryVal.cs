@@ -1,6 +1,8 @@
-﻿namespace xPlugUniAdmissionManager.Assets.AppKits.RegWizValidation
+﻿using FluentValidation;
+
+namespace xPlugUniAdmissionManager.Assets.AppKits.RegWizValidation
 {
-    public class LibraryVal
+    public class LibraryVal : AbstractValidator<LibraryVM>
     {
     }
 }

@@ -52,41 +52,41 @@ public class UIHelperKit
             case RegStage.Contact:
                 return ("_Contact", regModel.Contact);
             case RegStage.NokInfo:
-                return ("_Education", regModel.NokInfo);
+                return ("_NokInfo", regModel.NokInfo);
             case RegStage.Medicals:
-                return ("_ProgInfo", regModel.Medicals);
+                return ("_Medicals", regModel.Medicals);
             case RegStage.Olevels:
-                return ("_OtherInfo", regModel.Olevels);
+                return ("_Olevels", regModel.Olevels);
             case RegStage.Library:
-                return ("_Education", regModel.Library);
+                return ("_Library", regModel.Library);
             case RegStage.CourseReg:
-                return ("_ProgInfo", regModel.CourseReg);
+                return ("_CourseRegistration", regModel.CourseReg);
             case RegStage.DocUploads:
-                return ("_OtherInfo", regModel.DocUploads);
+                return ("_DocUploads", regModel.DocUploads);
             default:
                 return ("_BioData", regModel.BioData);
         }
     }
 
-    //public static ModuleIDVM WizIdHelp(RegistrationVM regModel)
-    //{
-    //    var item = new ModuleIDVM();
-    //    if (regModel.Education != null)
-    //    {
-    //        item.FacultyId = regModel.Education.FacultyId;
-    //        item.InstType = (int)regModel.Education.InstitutionType;
-    //        item.SelInstId = regModel.Education.InstitutionId;
-    //        item.SelCourseId = regModel.Education.CourseId;
-    //    }
+    public static ModuleIDVM WizIdHelp(RegistrationVM regModel)
+    {
+        var item = new ModuleIDVM();
+        //if (regModel.Education != null)
+        //{
+        //    item.FacultyId = regModel.Education.FacultyId;
+        //    item.InstType = (int)regModel.Education.InstitutionType;
+        //    item.SelInstId = regModel.Education.InstitutionId;
+        //    item.SelCourseId = regModel.Education.CourseId;
+        //}
 
-    //    if (regModel.Contact != null)
-    //    {
-    //        item.StateId = regModel.Contact.StateId;
-    //        item.SelLocalAreaId = regModel.Contact.LocalAreaId;
-    //    }
+        if (regModel.Contact != null)
+        {
+            item.StateId = regModel.Contact.ResStateId;
+            item.SelLocalAreaId = regModel.Contact.ResLocalAreaId;
+        }
 
-    //    return item;
-    //}
+        return item;
+    }
     public static ModuleHelpVM WizModuleHelp(RegistrationVM regModel)
     {
         var stage = regModel.RegStage;

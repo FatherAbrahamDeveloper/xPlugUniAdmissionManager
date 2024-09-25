@@ -36,6 +36,7 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
     //    ViewBag.CallId = calId.ToString();
     //    return View();
     //}
+    
 
     [HttpGet("wizard")]
     public IActionResult RegWizard( int? stage)

@@ -1,5 +1,16 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model (RegStage regStage, string btnTheme)
+<div class="form-footer d-flex justify-content-between mt-3">
+    @if (Model.regStage > RegStage.BioData)
+    {
+        <button type="button" class="btn btn-@Model.btnTheme" id="btnRegPrev" data-direction="prev">Previous</button>
+    }
+
+    @if (Model.regStage <= RegStage.DocUploads)
+    {
+        <button type="button" class="btn btn-@Model.btnTheme" id="btnRegNext" data-direction="next">Next</button>
+    }
+    @if (Model.regStage > RegStage.DocUploads)
+    {
+        <button type="submit" id="btnRegSubmit" class="btn btn-@Model.btnTheme">Submit</button>
+    }
+</div>

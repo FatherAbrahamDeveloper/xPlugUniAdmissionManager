@@ -1,7 +1,8 @@
 ﻿@model RegistrationVM
 @{
     ViewData["Title"] = "Registration";
-    Layout = "~/Views/Shared/Layouts/_FormLayout.cshtml";
+    //Layout = "~/Views/Shared/Layouts/_FormLayout.cshtml";
+   // Layout = "~/Views/Shared/Layouts/_FormLayout.cshtml";
 
     var error = ViewBag.Error as string;
     var hasError = !string.IsNullOrEmpty(error) && error.Length > 2;
