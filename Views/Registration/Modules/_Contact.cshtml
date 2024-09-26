@@ -20,43 +20,113 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12 step">
-                            <h4><span class="stepIndicator">Contact Info</span></h4>
+                            <h4><span class="stepIndicator">Contact Information</span></h4>
                             <div id="dvError"></div>
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <label for="HouseNo" class="label-f">House Number</label>
-                                    <input type="text" class="form-control form-select-lg form-set" asp-for="ResHouseNo" data-parsley-required="true" data-parsley-required-message="House Number is required">
-                                </div>
-                                <div class="col-sm-9">
-                                    <label for="Street" class="label-f">Street Name</label>
-                                    <input type="text" class="form-control form-select-lg form-set" asp-for="ResStreet" data-parsley-required="true" data-parsley-required-message="Street Name is required">
-                                </div>
-                                <div class="col-sm-4 pt-1">
-                                    <label for="Area" class="label-f">Area</label>
-                                    <input type="text" class="form-control form-select-lg form-set" asp-for="ResArea" data-parsley-required="true" data-parsley-required-message="Area Name is required">
-                                </div>
-                                <div class="col-sm-4 pt-1">
-                                    <label for="City" class="label-f">City</label>
-                                    <input type="text" class="form-control form-select-lg form-set" asp-for="ResCity" data-parsley-required="true" data-parsley-required-message="City Name is required">
-                                </div>
-                                <div class="col-sm-4 pt-1">
-                                    <label for="LandMark" class="label-f">Land-Mark</label>
-                                    <input type="text" class="form-control form-select-lg form-set" asp-for="ResLandMark" data-parsley-required="true" data-parsley-required-message="Landmark is required">
+                                <div class="col-sm-6 pt-1">
+                                    <label for="MobileNo" class="label-f">Mobile Number</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="MobileNo" readonly>
                                 </div>
                                 <div class="col-sm-6 pt-1">
-                                    <label for="State" class="label-f">State of Residence</label>
-                                    <vc:state-ddl Selected-Id="@Model.ResStateId"></vc:state-ddl>
-                                    <input type="hidden" asp-for="ResStateName" />
+                                    <label for="Email" class="label-f">Email</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="Email" readonly>
                                 </div>
                                 <div class="col-sm-6 pt-1">
-                                    <label for="LGA" class="label-f">Local Area of Residence</label>
-                                    <div id="ddlLocalArea">
-                                        <select class="form-select form-select-lg form-set" id="LocalAreaId" data-parsley-required-message="Kindly Select Local Area" required>
-                                            <option value="">-- Empty List --</option>
-                                        </select>
+                                    <label for="AltMobileNo" class="label-f">Alternate Mobile Number</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="AltMobileNo" readonly>
+                                </div>
+                                <div class="col-sm-6 pt-1">
+                                    <label for="AltEmail" class="label-f">Alternate Email</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="AltEmail" readonly>
+                                </div>
+                                <fieldset>
+                                    <legend>Residential Address</legend>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <label for="HouseNo" class="label-f">House Number</label>
+                                            <input type="text" class="form-control form-select-lg form-set" asp-for="ResHouseNo" data-parsley-required="true" data-parsley-required-message="House Number is required">
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <label for="Street" class="label-f">Street Name</label>
+                                            <input type="text" class="form-control form-select-lg form-set" asp-for="ResStreet" data-parsley-required="true" data-parsley-required-message="Street Name is required">
+                                        </div>
                                     </div>
-                                    <input type="hidden" asp-for="ResLocalAreaName" />
-                                </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 pt-1">
+                                            <label for="Area" class="label-f">Area</label>
+                                            <input type="text" class="form-control form-select-lg form-set" asp-for="ResArea" data-parsley-required="true" data-parsley-required-message="Area Name is required">
+                                        </div>
+                                        <div class="col-sm-4 pt-1">
+                                            <label for="City" class="label-f">City</label>
+                                            <input type="text" class="form-control form-select-lg form-set" asp-for="ResCity" data-parsley-required="true" data-parsley-required-message="City Name is required">
+                                        </div>
+                                        <div class="col-sm-4 pt-1">
+                                            <label for="LandMark" class="label-f">Land-Mark</label>
+                                            <input type="text" class="form-control form-select-lg form-set" asp-for="ResLandMark" data-parsley-required="true" data-parsley-required-message="Landmark is required">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 pt-1">
+                                            <label for="State" class="label-f">State of Residence</label>
+                                            <vc:state-ddl Selected-Id="@Model.ResStateId"></vc:state-ddl>
+                                            <input type="hidden" asp-for="ResStateName" />
+                                        </div>
+                                        <div class="col-sm-6 pt-1">
+                                            <label for="LGA" class="label-f">Local Area of Residence</label>
+                                            <div id="ddlLocalArea">
+                                                <select class="form-select form-select-lg form-set" id="LocalAreaId" data-parsley-required-message="Kindly Select Local Area" required>
+                                                    <option value="">-- Empty List --</option>
+                                                </select>
+                                            </div>
+                                            <input type="hidden" asp-for="ResLocalAreaName" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Permanent Address</legend>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <label for="HouseNo" class="label-f">House Number</label>
+                                            <input type="text" class="form-control form-select-lg form-set" asp-for="PermHouseNo" data-parsley-required="true" data-parsley-required-message="House Number is required">
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <label for="Street" class="label-f">Street Name</label>
+                                            <input type="text" class="form-control form-select-lg form-set" asp-for="PermStreet" data-parsley-required="true" data-parsley-required-message="Street Name is required">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 pt-1">
+                                            <label for="Area" class="label-f">Area</label>
+                                            <input type="text" class="form-control form-select-lg form-set" asp-for="PermArea" data-parsley-required="true" data-parsley-required-message="Area Name is required">
+                                        </div>
+                                        <div class="col-sm-4 pt-1">
+                                            <label for="City" class="label-f">City</label>
+                                            <input type="text" class="form-control form-select-lg form-set" asp-for="PermCity" data-parsley-required="true" data-parsley-required-message="City Name is required">
+                                        </div>
+                                        <div class="col-sm-4 pt-1">
+                                            <label for="LandMark" class="label-f">Land-Mark</label>
+                                            <input type="text" class="form-control form-select-lg form-set" asp-for="PermLandMark" data-parsley-required="true" data-parsley-required-message="Landmark is required">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 pt-1">
+                                            <label for="State" class="label-f">State of Residence</label>
+                                            <vc:state-ddl Selected-Id="@Model.PermStateId"></vc:state-ddl>
+                                            <input type="hidden" asp-for="ResStateName" />
+                                        </div>
+                                        <div class="col-sm-6 pt-1">
+                                            <label for="LGA" class="label-f">Local Area of Residence</label>
+                                            <div id="ddlLocalArea">
+                                                <select class="form-select form-select-lg form-set" id="LocalAreaId" data-parsley-required-message="Kindly Select Local Area" required>
+                                                    <option value="">-- Empty List --</option>
+                                                </select>
+                                            </div>
+                                            <input type="hidden" asp-for="PermLocalAreaName" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+
                             </div>
                         </div>
                     </div>

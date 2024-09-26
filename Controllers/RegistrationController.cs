@@ -22,7 +22,7 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
     private readonly IValidator<CourseRegVM> _courseRegValidator = courseRegValidator;
     private readonly IValidator<DocUploadsVM> _docUploadsValidator = docUploadsValidator;
     private readonly IValidator<LibraryVM> _libraryValidator = libraryValidator;
-    private readonly IValidator<MedicalsVM> _medicalsValidator = medicalsValidator; 
+    private readonly IValidator<MedicalsVM> _medicalsValidator = medicalsValidator;
     private readonly IValidator<NokInfoVM> _nokInfoValidator = nokInfoValidator;
     private readonly IValidator<OlevelsVM> _olevelsValidator = olevelsValidator;
     private readonly IWebHostEnvironment _environment = environment;
@@ -36,10 +36,10 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
     //    ViewBag.CallId = calId.ToString();
     //    return View();
     //}
-    
+
 
     [HttpGet("wizard")]
-    public IActionResult RegWizard( int? stage)
+    public IActionResult RegWizard(int? stage)
     {
         ViewBag.Error = "";
         var stageId = stage ?? (int)RegStage.BioData;
@@ -52,7 +52,7 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
         }
         var reg = resp.Value;
         reg.RegStage = (RegStage)stageId;
-       
+
 
         return View(reg);
     }
@@ -459,7 +459,7 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
             reg.Olevels.Grade = model.Grade;
 
 
-            
+
             reg.Library ??= new LibraryVM();
             reg.Library.PhotoPath = reg.PhotoPath;
 
@@ -526,7 +526,7 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
             var valResult5 = await _medicalsValidator.ValidateAsync(reg.Medicals);
             if (!valResult5.IsValid)
                 return Json(new { IsSuccessful = false, Error = valResult5.Errors.ToErrorListString(), IsAuthenticated = true });
-            
+
             if (reg.Olevels == null)
                 return Json(new { IsSuccessful = false, Error = "Invalid O'Levels Information", IsAuthenticated = true });
 
@@ -536,8 +536,8 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
 
             reg.Library ??= new LibraryVM();
             reg.Library.PhotoPath = reg.PhotoPath;
-            reg.Library.LibraryNumber = model.LibraryNumber;
-            reg.Library.MatricNumber = model.MatricNumber;
+            reg.Library.LibraryNo = model.LibraryNo;
+            reg.Library.MatricNo = model.MatricNo;
             reg.Library.AdmissionYear = model.AdmissionYear;
             reg.Library.LibraryUsername = model.LibraryUsername;
 
@@ -619,7 +619,7 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
             var valResult6 = await _olevelsValidator.ValidateAsync(reg.Olevels);
             if (!valResult6.IsValid)
                 return Json(new { IsSuccessful = false, Error = valResult5.Errors.ToErrorListString(), IsAuthenticated = true });
-            
+
             if (reg.Library == null)
                 return Json(new { IsSuccessful = false, Error = "Invalid O'Levels Information", IsAuthenticated = true });
 
@@ -629,8 +629,10 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
 
             reg.CourseReg ??= new CourseRegVM();
             reg.CourseReg.PhotoPath = reg.PhotoPath;
-            reg.CourseReg.MatricNumber = model.MatricNumber;
+            reg.CourseReg.MatricNo = model.MatricNo;
+            reg.CourseReg.FacultyId = model.FacultyId;
             reg.CourseReg.Faculty = model.Faculty;
+            reg.CourseReg.DepartmentId = model.DepartmentId;
             reg.CourseReg.Department = model.Department;
             reg.CourseReg.CourseOfStudy = model.CourseOfStudy;
 
@@ -753,6 +755,85 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
             UtilTools.LogE(ex.StackTrace, ex.Source, ex.Message);
             return Json(new { IsAuthenticated = true, IsSuccessful = false, IsReload = false, Error = "Process Error Occurred! Please try again later" });
         }
+    }
+
+    //[HttpPost("add-olevels")]
+    //public async Task<JsonResult> ProcessAddOlevels(OlevelsVM model)
+    //{
+    //    try
+    //    {
+
+
+
+
+
+    //        if (OlevelsVM.Olevels == null)
+    //        {
+    //            OlevelsVM.Olevels = new List<OlevelsVM>();
+    //        }
+
+    //        var typeItem = new OlevelsVM
+    //        {
+    //            OlevelsId = OlevelsVM.Olevels.Count + 1,
+    //            ExamBody = model.ExamBody,
+    //            ExamYear = model.ExamYear,
+    //            Status = ItemStatus.Active
+    //        };
+
+    //        OlevelsVM.Olevels.Add(typeItem);
+
+
+    //        return Json(new { IsAuthenticated = true, IsSuccessful = true, IsReload = false, Error = "" });
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        UtilTools.LogE(ex.StackTrace, ex.Source, ex.Message);
+    //        return Json(new { IsAuthenticated = true, IsSuccessful = false, IsReload = false, Error = "Process Error Occurred! Please try again later" });
+    //    }
+    //}
+
+    [HttpPost("add-olevels")]
+    public async Task<JsonResult> ProcessAddOlevels(OlevelsVM model)
+    {
+        try
+        {
+            // Ensure the static list is initialized if null
+            if (OlevelsVM.Olevels == null)
+            {
+                OlevelsVM.Olevels = new List<OlevelsVM>();
+            }
+
+            // Create a new OlevelsVM item and add it to the list
+            var typeItem = new OlevelsVM
+            {
+                OlevelsId = OlevelsVM.Olevels.Count + 1,
+                ExamBody = model.ExamBody,
+                ExamYear = model.ExamYear,
+                Status = ItemStatus.Active
+            };
+
+            OlevelsVM.Olevels.Add(typeItem);
+
+            // Return a success response (you may handle the response differently depending on the scenario)
+            return Json(new { IsAuthenticated = true, IsSuccessful = true, IsReload = false, Error = "" });
+        }
+        catch (Exception ex)
+        {
+            // Handle the exception and return a failure response
+            UtilTools.LogE(ex.StackTrace, ex.Source, ex.Message);
+            return Json(new { IsAuthenticated = true, IsSuccessful = false, IsReload = false, Error = "Process Error Occurred! Please try again later" });
+        }
+    }
+
+    // Method to load the view with the list of OlevelsVM
+    public IActionResult LoadOlevelsView()
+    {
+        return View(OlevelsVM.Olevels); // Pass the list to the view
+    }
+    public IActionResult OlevelsList()
+    {
+        var olevelsList = OlevelsVM.Olevels ?? new List<OlevelsVM>();
+        return View(olevelsList);
     }
 
 }

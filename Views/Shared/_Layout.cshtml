@@ -3,17 +3,52 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - xPlugUniAdmissionManager</title>
+    <title>@ViewData["Title"] - xPlug University Admission Manager</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/xPlugUniAdmissionManager.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/xPlugUniAdmissionManager.styles.css" asp-append-version="true" />
+    <style>
+        .navbar, .footer {
+            background-color: #003366; /* Dark blue color */
+            color: white;
+        }
+
+        .navbar-brand div {
+            color: white;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: #66ccff; /* Light blue color on hover */
+            }
+
+        .btn-reg {
+            background-color: #0056b3; /* Medium blue color */
+            color: white;
+        }
+
+            .btn-reg:hover {
+                background-color: #004080; /* Darker blue on hover */
+            }
+
+        .footer {
+            padding: 15px 0;
+        }
+
+            .footer a {
+                color: #66ccff; /* Light blue links */
+            }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <nav class="navbar navbar-expand-lg navbar-light shadow sticky-top p-0">
             <a href="@Url.Action("Index", "Home")" class="navbar-brand align-items-center text-center py-0 px-4 px-lg-5 pt-2">
-                <img src="~/img/logo.png" alt="xPlug University Admission Manager" width="120" />
-                <div style="text-transform:uppercase;font-size:12px;">Software Academy</div>
+                <img src="~/img/logo1.png" alt="xPlug University Admission Manager" width="120" />
+                <div style="text-transform:uppercase;font-size:12px;">xPlug University</div>
             </a>
             <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -22,22 +57,22 @@
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="@Url.Action("Index", "Home")" class="nav-item nav-link active">Home</a>
                     <a href="@Url.Action("About", "Home")" class="nav-item nav-link">About</a>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="@Url.Action("Contact", "Home")" class="nav-item nav-link">Contact</a>
                 </div>
-                @* <a href="@Url.Action("RegForm", "Registration")" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Login<i class="fa fa-arrow-right ms-3"></i></a> *@
                 <a href="@Url.Action("Login", "Home")" class="btn btn-reg rounded-0 py-4 px-lg-5 d-none d-lg-block">Login<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-center">
         <div class="container">
-            &copy; 2024 - xPlugUniAdmissionManager - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 xPlug University - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -1,7 +1,75 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CourseRegVM
 @{
-    
+    Layout = null;
+    var picSource = string.IsNullOrEmpty(Model.PhotoPath) ? "~/img/passproto.png" : $"~/AppDocs/TempUploads/{Model.PhotoPath}";
 }
-<h1>Course Registration Partial View</h1>
+
+<div class="row">
+    <div class="col-lg-3 regbg-student">
+        <div class="card regbg">
+            <div class="card-body">
+                <div class="text-center">
+                    <img src="@Url.Content(picSource)" id="photoView" alt="Passport Photo" class="img-fluid" width="260" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <div class="card">
+            <form id="frmEducation" method="post" data-parsley-validate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 step">
+                            <h4><span class="stepIndicator">Course of Study Registration</span></h4>
+                            <div id="dvError"></div>
+                            <div class="row">
+                                
+                                <div class="col-sm-6 pt-1">
+                                    <label for="MatricNo" class="label-f">Matriculation Number</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="MatricNo" readonly>
+                                </div>
+                                
+                                <div class="col-sm-6 pt-1">
+                                    <label for="Faculty" class="label-f">Faculty</label>
+                                    <div id="ddlFaculty">
+                                        <select class="form-select form-select-lg form-set" id="FacultyId" data-parsley-required-message="Kindly Select Your Faculty" required>
+                                            <option value="">-- Empty List --</option>
+                                        </select>
+                                    </div>
+                                    <input type="hidden" asp-for="Faculty" />
+                                </div>
+                                <div class="col-sm-6 pt-1">
+                                    <label for="Department" class="label-f">Department</label>
+                                    <div id="ddlDepartment">
+                                        <select class="form-select form-select-lg form-set" id="DepartmentId" data-parsley-required-message="Kindly Select Your Depaprtment" required>
+                                            <option value="">-- Empty List --</option>
+                                        </select>
+                                    </div>
+                                    <input type="hidden" asp-for="Department" />
+                                </div>
+                                <div class="col-sm-6 pt-1">
+                                    <label for="Course" class="label-f">Course Of Study</label>
+                                    <div id="ddlCourse">
+                                        <select class="form-select form-select-lg form-set" id="CourseId" data-parsley-required-message="Kindly Select Course Of Study" required>
+                                            <option value="">-- Empty List --</option>
+                                        </select>
+                                    </div>
+                                    <input type="hidden" asp-for="CourseOfStudy" />
+                                </div>
+                               
+                                @* <div class="col-sm-4 pt-1">
+                                    <label for="City" class="label-f">Admission Year</label>
+                                    <vc:year-ddl id="YearOfAdmisssion" Selected-Id="@Model.YearOfAdmisssion"></vc:year-ddl>
+                                </div>
+                                <div class="col-sm-4 pt-1">
+                                    <label for="YearOfGraduation" class="label-f">Graduation Year</label>
+                                    <vc:year-ddl id="YearOfGraduation" Selected-Id="@Model.YearOfGraduation"></vc:year-ddl>
+                                </div> *@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

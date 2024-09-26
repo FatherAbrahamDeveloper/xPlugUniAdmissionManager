@@ -1,7 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model LibraryVM
 @{
+    Layout = null;
+    var picSource = string.IsNullOrEmpty(Model.PhotoPath) ? "~/img/passproto.png" : $"~/AppDocs/TempUploads/{Model.PhotoPath}";
 }
 
-<h1>Library Partial View</h1>
+<div class="row">
+    <div class="col-lg-3 regbg-student">
+        <div class="card regbg">
+            <div class="card-body">
+                <div class="text-center">
+                    <img src="@Url.Content(picSource)" id="photoView" alt="Passport Photo" class="img-fluid" width="260" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <div class="card">
+            <form id="frmContact" method="post" data-parsley-validate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 step">
+                            <h4><span class="stepIndicator">Library Information</span></h4>
+                            <div id="dvError"></div>
+                            <div class="row">
+                                <div class="col-sm-6 pt-1">
+                                    <label for="MatricNo" class="label-f">Matriculation Number</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="MatricNo" readonly>
+                                </div>
+                                <div class="col-sm-6 pt-1">
+                                    <label for="LibraryNo" class="label-f">Library Number</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="LibraryNo" readonly>
+                                </div>
+                                <div class="col-sm-6 pt-1">
+                                    <label for="AdmissionYear" class="label-f">Year of Admission</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="AdmissionYear" readonly>
+                                </div>
+                                <div class="col-sm-6 pt-1">
+                                    <label for="LibraryUsername" class="label-f">E-Library Username</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="LibraryUsername" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

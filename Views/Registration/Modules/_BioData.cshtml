@@ -26,13 +26,13 @@
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-between">
                             <h4><span class="stepIndicator">Bio Data</span></h4>
-                            <div class="pagicon">
+                            @* <div class="pagicon">
                                 <span><a href="#" class="pag pagin">1</a></span>
                                 <span><a href="#" class="pag">2</a></span>
                                 <span><a href="#" class="pag">3</a></span>
                                 <span><a href="#" class="pag">4</a></span>
                                 <span><a href="#" class="pag">5</a></span>
-                            </div>
+                            </div> *@
                         </div>
                         <div class="col-md-12 step">
                             <div id="dvError"></div>
@@ -75,15 +75,43 @@
                                     </select>
                                     <span asp-validation-for="MaritalStatus"></span>
                                 </div>
-                              @*   <div class="col-sm-6 pt-1">
-                                    <label for="MobileNo" class="label-f">Mobile Number</label>
-                                    <input type="tel" class="form-control form-select-lg form-set" asp-for="MobileNo" maxlength="11" data-parsley-required="true" data-parsley-required-message="Mobile Number is required">
-                                </div>
-                                <div class="col-sm-6 pt-1">
-                                    <label for="Email" class="label-f">Email</label>
-                                    <input type="email" class="form-control form-select-lg form-set" asp-for="Email" data-parsley-required="true" data-parsley-required-message="Email is required">
-                                </div> *@
 
+                                <div class="col-sm-4 pt-1">
+                                    <label for="HairColor" class="label-f">Hair Color</label>
+                                    <select asp-for="HairColor" class="form-select form-select-lg form-set" data-parsley-min="1" data-parsley-min-message="Kindly select your hair color" data-parsley-required-message="Kindly select your hair color">
+                                        <option value="0" selected> -- Please Select -- </option>
+                                        <option value="1">Black</option>
+                                        <option value="2">Brown</option>
+                                        <option value="3">Blonde</option>
+                                        <option value="4">Red</option>
+                                        <option value="5">Other</option>
+                                    </select>
+                                    <span asp-validation-for="HairColor"></span>
+                                </div>
+                                <div class="col-sm-4 pt-1">
+                                    <label for="EyeColor" class="label-f">Eye Color</label>
+                                    <select asp-for="EyeColor" class="form-select form-select-lg form-set" data-parsley-min="1" data-parsley-min-message="Kindly select your eye color" data-parsley-required-message="Kindly select your eye color">
+                                        <option value="0" selected> -- Please Select -- </option>
+                                        <option value="1">Black</option>
+                                        <option value="2">Blue</option>
+                                        <option value="3">Brown</option>
+                                        <option value="4">Green</option>
+                                        <option value="5">Hazel</option>
+                                        <option value="6">Gray</option>
+                                        <option value="7">Amber</option>
+                                        <option value="8">Other</option>
+                                    </select>
+                                    <span asp-validation-for="EyeColor"></span>
+                                </div>
+                                <div class="col-sm-4 pt-1">
+                                    <label for="FacialMark" class="label-f">Do You Have a Facial Mark?</label>
+                                    <select asp-for="FacialMark" class="form-select form-select-lg form-set" data-parsley-min="1" data-parsley-min-message="Kindly indicate if you have a facial mark" data-parsley-required-message="Kindly indicate if you have a facial mark">
+                                        <option value="0" selected> -- Please Select -- </option>
+                                        <option value="1">No</option>
+                                        <option value="2">Yes</option>
+                                    </select>
+                                    <span asp-validation-for="FacialMark"></span>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,115 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model MedicalsVM
 @{
+    Layout = null;
+    var picSource = string.IsNullOrEmpty(Model.PhotoPath) ? "~/img/passproto.png" : $"~/AppDocs/TempUploads/{Model.PhotoPath}";
 }
-<h1>Medicals Partial View</h1>
+
+<div class="row">
+    <div class="col-lg-3 regbg-student">
+        <div class="card regbg">
+            <div class="card-body">
+                <div class="text-center">
+                    <img src="@Url.Content(picSource)" id="photoView" alt="Passport Photo" class="img-fluid" width="260" />
+                </div>
+                <div>
+                    <form id="frmPicUpload" method="post" action="@Url.Action("upload-photo", "register")" enctype="multipart/form-data">
+                        <input class="form-control" type="file" id="photoUpload" name="photoUpload" accept="image/*" placeholder="Upload Photo">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div class="card">
+            <form id="frmBiodata" method="post" data-parsley-validate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <h4><span class="stepIndicator">Medical Information</span></h4>
+                            @* <div class="pagicon">
+                            <span><a href="#" class="pag pagin">1</a></span>
+                            <span><a href="#" class="pag">2</a></span>
+                            <span><a href="#" class="pag">3</a></span>
+                            <span><a href="#" class="pag">4</a></span>
+                            <span><a href="#" class="pag">5</a></span>
+                            </div> *@
+                        </div>
+                        <div class="col-md-12 step">
+                            <div id="dvError"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="Weight" class="label-f">Your Weight in Kilograms</label>
+                                    <input type="number" class="form-control form-select-lg form-set" asp-for="Weight" data-parsley-required="true" data-parsley-required-message="Your weight is required">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="Height" class="label-f">Your Height in Centimeters</label>
+                                    <input type="number" class="form-control form-select-lg form-set" asp-for="Height" data-parsley-required="true" data-parsley-required-message="Your height is required">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="BMI" class="label-f">Your BMI (Body Mass Index)</label>
+                                    <input type="number" class="form-control form-select-lg form-set" asp-for="BMI">
+                                </div>
+
+                                <div class="col-sm-6 pt-1">
+                                    <label for="BloodGroup" class="label-f">Kindly Indicate Your Blood Group</label>
+                                    <select class="form-select form-select-lg form-set" asp-for="BloodGroup">
+                                        <option value="">Select Blood Group</option>
+                                        <option value="APositive">A+</option>
+                                        <option value="ANegative">A-</option>
+                                        <option value="BPositive">B+</option>
+                                        <option value="BNegative">B-</option>
+                                        <option value="ABPositive">AB+</option>
+                                        <option value="ABNegative">AB-</option>
+                                        <option value="OPositive">O+</option>
+                                        <option value="ONegative">O-</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-6 pt-1">
+                                    <label for="Genotype" class="label-f">Kindly Indicate Your Genotype</label>
+                                    <select class="form-select form-select-lg form-set" asp-for="Genotype">
+                                        <option value="">Select Genotype</option>
+                                        <option value="AA">AA</option>
+                                        <option value="AS">AS</option>
+                                        <option value="SS">SS</option>
+                                        <option value="AC">AC</option>
+                                        <option value="SC">SC</option>
+                                        <option value="CC">CC</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-12 pt-1">
+                                    <label for="Allergy" class="label-f">Do you have any allergies?</label>
+                                    <div>
+                                        <input type="radio" asp-for="Allergy" value="true" /> Yes
+                                        <input type="radio" asp-for="Allergy" value="false" /> No
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 pt-1">
+                                    <label for="AllergyType" class="label-f">If yes, kindly indicate the type of allergy that you have</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="AllergyType" readonly>
+                                </div>
+
+                                <div class="col-sm-12 pt-1">
+                                    <label for="MedicalCondition" class="label-f">Do you have any medical condition?</label>
+                                    <div>
+                                        <input type="radio" asp-for="MedicalCondition" value="true" /> Yes
+                                        <input type="radio" asp-for="MedicalCondition" value="false" /> No
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 pt-1">
+                                    <label for="MedicalConditionType" class="label-f">If yes, kindly indicate the type of medical condition you have</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="MedicalCondition" readonly>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

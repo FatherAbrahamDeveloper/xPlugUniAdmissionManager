@@ -1,0 +1,87 @@
+﻿@model OlevelsVM
+@{
+    ViewData["Title"] = "Add Olevels";
+    Layout = null;
+    var error = ViewBag.Error as string;
+    var hasError = !string.IsNullOrEmpty(error);
+
+    var displayVal = ViewData["_Display"] as string;
+    var isVisible = true;
+    if (!string.IsNullOrEmpty(displayVal) && displayVal.IsNumeric())
+    {
+        if (int.Parse(displayVal) == -1)
+        {
+            isVisible = false;
+        }
+    }
+    <script src="~/js/pages/main/olevels.js"></script>
+}
+@if (!isVisible)
+{
+    @await Html.PartialAsync("_ActiveChecker")
+}
+else
+{
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-flex align-items-center">
+                <h5 class="modal-title">Add Course Type</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="add-contact-box">
+                    <div class="add-contact-content">
+                        <div id="popupViewDiv">
+                            <form method="post" id="frmAdd" data-parsley-validate="">
+                                <div class="row">
+                                    @if (hasError)
+                                    {
+                                        <div class="form-group">
+                                            <div class="alert alert-danger">@Html.Raw(error)</div>
+                                        </div>
+                                    }
+
+                                    <div id="dvError"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="pb-1">Exam Body</label>
+                                            <input type="text" class="form-control" asp-for="ExamBody" required="" data-parsley-required-message="Exam Body Name is required">
+                                            <span asp-validation-for="ExamBody"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="pb-1">Exam Year</label>
+                                            <input type="text" class="form-control" asp-for="ExamYear" required="" data-parsley-required-message="Exam Year is required">
+                                            <span asp-validation-for="ExamYear"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex gap-6 m-0">
+                    <button type="submit" id="btnSave" class="btn btn-success">Add</button>
+                    <button class="btn bg-danger-subtle text-danger" data-bs-dismiss="modal">Discard</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script>
+    $(function () {
+        $("#btnSave").onSavePopupData("#frmAdd", "add-olevels")
+    });
+</script>

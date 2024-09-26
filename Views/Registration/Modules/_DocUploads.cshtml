@@ -1,6 +1,73 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model DocUploadsVM
 @{
+    Layout = null;
+    var picSource = string.IsNullOrEmpty(Model.PhotoPath) ? "~/img/passproto.png" : $"~/AppDocs/TempUploads/{Model.PhotoPath}";
 }
-<h1>Document Uploads Partial View</h1>
+
+<div class="row">
+    <div class="col-lg-3 regbg-student">
+        <div class="card regbg">
+            <div class="card-body">
+                <div class="text-center">
+                    <img src="@Url.Content(picSource)" id="photoView" alt="Passport Photo" class="img-fluid" width="260" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <div class="card">
+            <form id="frmEducation" method="post" data-parsley-validate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 step">
+                            <h4><span class="stepIndicator">Document Uploads</span></h4>
+                            <div id="dvError"></div>
+                            <div class="row">
+
+                                <div class="col-sm-6 pt-1">
+                                    <label for="AdmissionLetter " class="label-f">Admission Letter</label>
+                                    <input type="file" class="form-control form-select-lg form-set" asp-for="AdmissionLetter" accept=".pdf, .jpg, .jpeg, .png">
+                                </div>
+
+                                <div class="col-sm-6 pt-1">
+                                    <label for="UTME" class="label-f">UTME</label>
+                                    <input type="file" class="form-control form-select-lg form-set" asp-for="UTME" accept=".pdf, .jpg, .jpeg, .png">
+                                </div>
+
+                                <div class="col-sm-6 pt-1">
+                                    <label for="Olevel" class="label-f">O Levels Result</label>
+                                    <input type="file" class="form-control form-select-lg form-set" asp-for="Olevel" accept=".pdf, .jpg, .jpeg, .png">
+                                </div>
+
+                                <div class="col-sm-6 pt-1">
+                                    <label for="Olevel2" class="label-f">Second O Levels Result (if applicable)</label>
+                                    <input type="file" class="form-control form-select-lg form-set" asp-for="Olevel2" accept=".pdf, .jpg, .jpeg, .png">
+                                </div>
+
+                                <div class="col-sm-6 pt-1">
+                                    <label for="NIN" class="label-f">National Identification Number</label>
+                                    <input type="file" class="form-control form-select-lg form-set" asp-for="NIN" accept=".pdf, .jpg, .jpeg, .png">
+                                </div>
+
+                                <div class="col-sm-6 pt-1">
+                                    <label for="BirthCertificate" class="label-f">Birth Certificate</label>
+                                    <input type="file" class="form-control form-select-lg form-set" asp-for="BirthCertificate" accept=".pdf, .jpg, .jpeg, .png">
+                                </div>
+                                <div class="col-sm-6 pt-1">
+                                    <label for="Testimonial" class="label-f">Testimonial</label>
+                                    <input type="file" class="form-control form-select-lg form-set" asp-for="Testimonial" accept=".pdf, .jpg, .jpeg, .png">
+                                </div>
+
+                                <div class="col-sm-6 pt-1">
+                                    <label for="ReferenceLetter" class="label-f">Reference Letter</label>
+                                    <input type="file" class="form-control form-select-lg form-set" asp-for="ReferenceLetter" accept=".pdf, .jpg, .jpeg, .png">
+                                </div>
+                                                         
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

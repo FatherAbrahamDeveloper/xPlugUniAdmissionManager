@@ -1,8 +1,8 @@
 ﻿@model RegistrationVM
 @{
     ViewData["Title"] = "Registration";
-    //Layout = "~/Views/Shared/Layouts/_FormLayout.cshtml";
-   // Layout = "~/Views/Shared/Layouts/_FormLayout.cshtml";
+    // Layout = "~/Views/Shared/Layouts/_FormLayout.cshtml";
+
 
     var error = ViewBag.Error as string;
     var hasError = !string.IsNullOrEmpty(error) && error.Length > 2;
@@ -15,14 +15,14 @@
 
 }
 
-@* <section class="@headVals.csClass" style="height: 135px;">
+@*< section class="@headVals.csClass" style="height: 135px;">
     <div class="container pt-3 d-flex">
-        <img src="~/img/icon/@headVals.iiCon" alt="" width="100" />
-        <h5 class="quicksand pt-4">
-            <strong class="ms-1">@headVals.title</strong>
-        </h5>
+    <img src="~/img/icon/@headVals.iiCon" alt="" width="100" />
+    <h5 class="quicksand pt-4">
+    <strong class="ms-1">@headVals.title</strong>
+    </h5>
     </div>
-</section> *@
+    </section> *@
 
 
 
@@ -31,22 +31,40 @@
         <div class="container mb-5">
             @if (hasError)
             {
-                <div class="alert alert-danger">@Html.Raw(error)</div>
+                    <div class="alert alert-danger">@Html.Raw(error)</div>
             }
             @await Html.PartialAsync(modVals.moduleName, modVals.model)
-@*             @await Html.PartialAsync("_RegNav", (Model.RegStage, headVals.btnTheme))
- *@        </div>
+            @*             @await Html.PartialAsync("_RegNav", (Model.RegStage, headVals.btnTheme))*@       
+
+            <div class="form-footer d-flex justify-content-between mt-3">
+                @if (Model.RegStage > RegStage.BioData)
+                {
+                <button type="button" class="btn btn-primary" id="btnRegPrev" data-direction="prev">Previous</button>
+                }
+
+                @if (Model.RegStage < RegStage.DocUploads)
+                {
+                <button type="button" class="btn btn-primary" id="btnRegNext" data-direction="next">Next</button>
+                }
+                @if (Model.RegStage == RegStage.DocUploads)
+                {
+            <button type="submit" id="btnRegSubmit" class="btn btn-primary">Submit</button>
+                }
+</section>
+</div>
+</div>
+
     </div>
 </section>
 
 
 @section Scripts {
-    <script src="~/js/pages/main/registration/reg-wizard.js" asp-append-version="true"></script>
-    <script src="~/js/pages/core/lookup-cascade.js" asp-append-version="true"></script>
-    <script>
-        var modInfo = @Html.Raw(JsonConvert.SerializeObject(module))
-            $(function () {
-                onloadCascade('@ids.InstType', '@ids.SelInstId', '@ids.FacultyId', '@ids.SelCourseId', '@ids.StateId', '@ids.SelLocalAreaId');
-            });
+        <script src="~/js/pages/main/registration/reg-wizard.js" asp-append-version="true"></script>
+        <script src="~/js/pages/core/lookup-cascade.js" asp-append-version="true"></script>
+        <script>
+    var modInfo = @Html.Raw(JsonConvert.SerializeObject(module))
+        $(function () {
+            onloadCascade('@ids.InstType', '@ids.SelInstId', '@ids.FacultyId', '@ids.SelCourseId', '@ids.StateId', '@ids.SelLocalAreaId');
+        });
     </script>
 }

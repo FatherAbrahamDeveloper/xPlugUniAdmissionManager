@@ -1,6 +1,136 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model NokInfoVM
 @{
+    Layout = null;
+    var picSource = string.IsNullOrEmpty(Model.PhotoPath) ? "~/img/passproto.png" : $"~/AppDocs/TempUploads/{Model.PhotoPath}";
 }
-<h1>Next of Kin Information Partial View</h1>
+
+<div class="row">
+    <div class="col-lg-3 regbg-student">
+        <div class="card regbg">
+            <div class="card-body">
+                <div class="text-center">
+                    <img src="@Url.Content(picSource)" id="photoView" alt="Passport Photo" class="img-fluid" width="260" />
+                </div>
+                <div>
+                    <form id="frmPicUpload" method="post" action="@Url.Action("upload-photo", "register")" enctype="multipart/form-data">
+                        <input class="form-control" type="file" id="photoUpload" name="photoUpload" accept="image/*" placeholder="Upload Photo">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <div class="card">
+            <form id="frmBiodata" method="post" data-parsley-validate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <h4><span class="stepIndicator">Next of Kin Information</span></h4>
+                            @* <div class="pagicon">
+                            <span><a href="#" class="pag pagin">1</a></span>
+                            <span><a href="#" class="pag">2</a></span>
+                            <span><a href="#" class="pag">3</a></span>
+                            <span><a href="#" class="pag">4</a></span>
+                            <span><a href="#" class="pag">5</a></span>
+                            </div> *@
+                        </div>
+                        <div class="col-md-12 step">
+                            <div id="dvError"></div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="Surname" class="label-f">Surname</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="NokSurname" data-parsley-required="true" data-parsley-required-message="Surname is required">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="FirstName" class="label-f">First Name</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="NokFirstName" data-parsley-required="true" data-parsley-required-message="First Name is required">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="OtherNames" class="label-f">Other Names</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="NokOtherNames" data-parsley-required="true" data-parsley-required-message="Other Names are required">
+                                </div>
+                                <div class="col-sm-4 pt-1">
+                                    <label for="DateOfBirth" class="label-f">Date Of Birth</label>
+                                    <input type="date" class="form-control form-select-lg form-set" asp-for="NokDateOfBirth" value="@DateTime.Today.ToString("yyyy-MM-dd")" data-parsley-min-message="Kindly select your next of kin date of birth" data-parsley-required="true" data-parsley-required-message="Next of kin date of Birth is required">
+                                </div>
+                                <div class="col-sm-4 pt-1">
+                                    <label for="Gender" class="label-f">Gender</label>
+                                    <select asp-for="NokGender" class="form-select form-select-lg form-set" data-parsley-min="1" data-parsley-min-message="Kindly select Gender" data-parsley-required-message="Kindly select Gender">
+                                        <option value="0" selected> -- Please Select -- </option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                    <span asp-validation-for="NokGender"></span>
+                                </div>
+                                <div class="col-sm-4 pt-1">
+                                    <label for="MaritalStatus" class="label-f">Marital Status</label>
+                                    <select asp-for="NokMaritalStatus" class="form-select form-select-lg form-set" data-parsley-min="1" data-parsley-min-message="Kindly select Marital Status" data-parsley-required-message="Kindly select Marital Status">
+                                        <option value="0" selected> -- Please Select -- </option>
+                                        <option value="1">Single</option>
+                                        <option value="2">Married</option>
+                                        <option value="3">Separated</option>
+                                        <option value="4">Divorced</option>
+                                        <option value="5">Widow</option>
+                                        <option value="6">Widower</option>
+                                    </select>
+                                    <span asp-validation-for="NokMaritalStatus"></span>
+                                </div>
+                                <div class="col-sm-6 pt-1">
+                                    <label for="MobileNo" class="label-f">Mobile Number</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="NokMobile" readonly>
+                                </div>
+                                <div class="col-sm-6 pt-1">
+                                    <label for="Email" class="label-f">Email</label>
+                                    <input type="text" class="form-control form-select-lg form-set" asp-for="NokEmail" readonly>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="HouseNo" class="label-f">House Number</label>
+                                        <input type="text" class="form-control form-select-lg form-set" asp-for="NokHouseNo" data-parsley-required="true" data-parsley-required-message="House Number is required">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <label for="Street" class="label-f">Street Name</label>
+                                        <input type="text" class="form-control form-select-lg form-set" asp-for="NokStreet" data-parsley-required="true" data-parsley-required-message="Street Name is required">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4 pt-1">
+                                        <label for="Area" class="label-f">Area</label>
+                                        <input type="text" class="form-control form-select-lg form-set" asp-for="NokArea" data-parsley-required="true" data-parsley-required-message="Area Name is required">
+                                    </div>
+                                    <div class="col-sm-4 pt-1">
+                                        <label for="City" class="label-f">City</label>
+                                        <input type="text" class="form-control form-select-lg form-set" asp-for="NokCity" data-parsley-required="true" data-parsley-required-message="City Name is required">
+                                    </div>
+                                    <div class="col-sm-4 pt-1">
+                                        <label for="LandMark" class="label-f">Land-Mark</label>
+                                        <input type="text" class="form-control form-select-lg form-set" asp-for="NokLandMark" data-parsley-required="true" data-parsley-required-message="Landmark is required">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 pt-1">
+                                        <label for="State" class="label-f">State of Residence</label>
+                                        <vc:state-ddl Selected-Id="@Model.NokStateId"></vc:state-ddl>
+                                        <input type="hidden" asp-for="NokStateName" />
+                                    </div>
+                                    <div class="col-sm-6 pt-1">
+                                        <label for="LGA" class="label-f">Local Area of Residence</label>
+                                        <div id="ddlLocalArea">
+                                            <select class="form-select form-select-lg form-set" id="LocalAreaId" data-parsley-required-message="Kindly Select Local Area" required>
+                                                <option value="">-- Empty List --</option>
+                                            </select>
+                                        </div>
+                                        <input type="hidden" asp-for="NokLocalAreaName" />
+                                    </div>
+                                </div>
+                                                               
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
