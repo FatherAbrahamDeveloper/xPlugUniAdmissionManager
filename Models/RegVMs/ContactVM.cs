@@ -8,6 +8,10 @@
         public string AltMobileNo { get; set; } = Empty;
         public string AltEmail { get; set; } = Empty;
         //Residential Address
+
+        //public AddressVM Residential { get; set; } = default!;
+        //public AddressVM Permanent { get; set; } = default!;
+
         public string ResHouseNo { get; set; } = Empty;
         public string ResStreet { get; set; } = Empty;
         public string ResArea { get; set; } = Empty;
