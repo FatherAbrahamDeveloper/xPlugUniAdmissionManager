@@ -1,5 +1,5 @@
 ﻿@model (RegStage regStage, string btnTheme)
-@* <div class="form-footer d-flex justify-content-between mt-3">
+<div class="form-footer d-flex justify-content-between mt-3">
     @if (Model.regStage > RegStage.BioData)
     {
         <button type="button" class="btn btn-@Model.btnTheme" id="btnRegPrev" data-direction="prev">Previous</button>
@@ -13,4 +13,4 @@
     {
         <button type="submit" id="btnRegSubmit" class="btn btn-@Model.btnTheme">Submit</button>
     }
-</div> *@
+</div> 

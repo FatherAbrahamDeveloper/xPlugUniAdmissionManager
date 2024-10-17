@@ -33,8 +33,19 @@
             {
                     <div class="alert alert-danger">@Html.Raw(error)</div>
             }
-            @await Html.PartialAsync(modVals.moduleName, modVals.model)
-            @*             @await Html.PartialAsync("_RegNav", (Model.RegStage, headVals.btnTheme))*@       
+
+            @if (modVals.moduleName == "_Olevels")
+            {
+                @await Html.PartialAsync(modVals.moduleName, new List<OlevelsVM> { (OlevelsVM)modVals.model })
+
+            }
+            else
+            {
+                @await Html.PartialAsync(modVals.moduleName, modVals.model)
+            }
+
+
+            @*          @await Html.PartialAsync("_RegNav", (Model.RegStage, headVals.btnTheme))*@       
 
             <div class="form-footer d-flex justify-content-between mt-3">
                 @if (Model.RegStage > RegStage.BioData)

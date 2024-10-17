@@ -397,8 +397,8 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
     }
 
     //O levels
-    [HttpPost("process-o-levels")]
-    public async Task<JsonResult> ProcessOlevels(OlevelsVM model)
+    [HttpPost("process-olevels")]
+    public async Task<IActionResult> ProcessOlevels(OlevelsVM model)
     {
         try
         {
@@ -462,7 +462,9 @@ public class RegistrationController(IValidator<BioDataVM> bioValidator, IValidat
 
             reg.Library ??= new LibraryVM();
             reg.Library.PhotoPath = reg.PhotoPath;
+            //return View(new List<OlevelsVM>());
 
+            //return View("_Olevels", new List<OlevelsVM> { reg.Olevels });
 
             return Json(new { IsAuthenticated = true, IsSuccessful = true, IsReload = false, Error = "" });
         }

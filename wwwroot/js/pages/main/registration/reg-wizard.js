@@ -43,7 +43,7 @@ function processNext(modInfo) {
     blockMainView();
     const frm = modInfo.FormId;
     const frmData = $(frm).serializeArray();
-    const redUrl = "/register/wizard?progType=" + modInfo.RegType + "&stage=" + modInfo.NextStage;
+    const redUrl = "/wizard?stage=" + modInfo.NextStage;
 
     $.ajax({
         type: "POST",
@@ -79,7 +79,7 @@ function processNext(modInfo) {
 }
 
 function processPrev(modInfo) {
-    const redUrl = "/register/wizard?progType=" + modInfo.RegType + "&stage=" + modInfo.PrevStage;
+    const redUrl = "/wizard?" + "stage=" + modInfo.PrevStage;
     window.location.href = redUrl;
     return false;
 }
